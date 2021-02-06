@@ -28,7 +28,7 @@ def get_last_action(action):
     query = client.query(kind=action)
     users_to_call = []
     for user in list(query.fetch()):
-        if time_check(user["time"]):
+        if time_check(user["time"], action):
             users_to_call.append(user.key.id_or_name)
     return users_to_call
 
