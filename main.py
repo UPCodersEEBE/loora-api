@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
-from functions.time_functions import check_time
+from functions.time_functions import time_check
 from functions.database import store_ping
 
 
@@ -14,7 +14,7 @@ def ping():
     json_data = request.get_json(force=True)
     try:
         time = json_data["time"]
-        response = check_time(time)
+        response = time_check(time)
         store_ping(json_data)
         return response
     except:
