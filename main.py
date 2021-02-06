@@ -16,17 +16,31 @@ def alive():
     try:
         time = json_data["metadata"]["time"]
         dev_id = json_data["dev_id"]
-        last_us(dev_id)
         store_alive(json_data)
-        return response
+        last_us(dev_id)
+        return "test"
     except:
         return "We need time parameter"
+
+
+@app.route("/check_users", methods=["GET"])
+def check_users():
+    json_data = request.get_json(force=True)
+    try:
+        dev_id = json_data["dev_id"]
+        last_us(dev_id)
+        return response
+    except:
+        return "Internal error"
 
 
 # Calls DB and if the last recorded ultrasound ping was more than 6h ago, calls the user
 def last_us(dev_id):
     if time_check(get_us(dev_id)):
         print("ha trucat a la Clara")
+    else:
+        print("no cal trucar a la Clara")
+
         # send_whatsapp("695848183", "Clara")
     return None
 
