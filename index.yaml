@@ -1,0 +1,7 @@
+indexes:
+  - kind: visit
+    properties:
+      - name: dev_id
+        direction: asc
+      - name: counter
+        direction: desc
