@@ -5,8 +5,8 @@ from .twipy import send_whatsapp
 client = datastore.Client()
 
 # adds a device, userId and telephone to users DB
-def add_device_db(device):
-    entity = datastore.Entity(key=client.key("users", device["dev_id"]))
+def add_device_db(device, dev_id):
+    entity = datastore.Entity(key=client.key("users", device))
     entity.update(device)
     client.put(entity)
     return
