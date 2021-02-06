@@ -22,12 +22,14 @@ proto-plus==1.13.0
 protobuf==3.14.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
+PyJWT==1.7.1
 pytz==2021.1
 PyYAML==5.4.1
 requests==2.25.1
 rsa==4.7
 six==1.15.0
 soupsieve==2.1
+twilio==6.51.1
 typing-extensions==3.7.4.3
 typing-inspect==0.6.0
 urllib3==1.26.3
