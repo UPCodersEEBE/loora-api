@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS
 import json
-from functions.time_functions import time_check
 from functions.database import store_db, get_last_action, call_users, add_device_db
 from functions.twipy import send_whatsapp
 
