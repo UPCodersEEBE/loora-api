@@ -4,7 +4,7 @@ import calendar
 import time
 
 
-def time_check(timeinput):
+def time_check(timeinput,action):
     clock = timeinput[:-1].split("T")[1]
     c = clock.split(":")
 
@@ -18,11 +18,21 @@ def time_check(timeinput):
         int(d[0]), int(d[1]), int(d[2]), int(c[0]), int(c[1]), int(c[2][:2])
     )
     # timein = "10:12:34"
-    compare = timein + timedelta(hours=12)
+
+
+    if action == "alive" : 
+        compare = timein + timedelta(hours=12)
+
+
+    elif action == "ping":
+        compare = timein + timedelta(minutes=10)
+
+
+
 
     if now > compare:
         return True
-    if now < compare:
+    elif now < compare:
         return False
 
 
