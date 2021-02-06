@@ -1,10 +1,12 @@
 from google.cloud import datastore
+from .time_functions import time_check
+from .twipy import send_whatsapp
 
 client = datastore.Client()
 
 # adds a device, userId and telephone to users DB
-def add_device(device):
-    entity = datastore.Entity(key=client.key("users"))
+def add_device_db(device):
+    entity = datastore.Entity(key=client.key("users", device["dev_id"]))
     entity.update(device)
     client.put(entity)
     return
@@ -16,25 +18,25 @@ def store_db(data, action):
     data_dict = {"time": data["metadata"]["time"]}
     entity.update(data_dict)
     client.put(entity)
+    if action == "alive":
+        store_db(data, "ping")
     return
 
 
 # gets last time the user has activated the us sensor
-def get_last_us(dev_id):
-    query = client.query(kind="visit")
-    query.add_filter("dev_id", "=", dev_id)
-    query.order = ["-counter"]
-    return {
-        "time": list(query.fetch())[0]["metadata"]["time"],
-        "phone": list(query.fetch())[0]["hardware_serial"],
-    }
+def get_last_action(action):
+    query = client.query(kind=action)
+    users_to_call = []
+    for user in list(query.fetch()):
+        if time_check(user["time"]):
+            users_to_call.append(user.key.id_or_name)
+    return users_to_call
 
 
 # Gets a list of all unique dev_id
-def get_users(action):
-    query = client.query(kind=action)
-    query.order = ["time"]
-    users = []
+def call_users(users_to_call, action):
+    query = client.query(kind="users")
     for user in list(query.fetch()):
-        print(user.key)
-    return users
+        if (user.key.id_or_name) in users_to_call:
+            send_whatsapp(user["phone"], user["name"])
+    return
