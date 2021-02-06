@@ -1,4 +1,1 @@
 runtime: python37
-
-env_variables: TWILIO_ACCOUNT_SID=ACfc98717b77cac381fc2bf9910fc03c1e
-  TWILIO_AUTH_TOKEN=73a83f6619dda8fd78ba1b88dd571b50
