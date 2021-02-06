@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS
 import json
 from functions.time_functions import time_check
@@ -9,6 +9,9 @@ from functions.twipy import send_whatsapp
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/about")
+def about():
+    return render_template('about.html')
 
 @app.route("/add_device", methods=["POST"])
 def add_device():
@@ -63,7 +66,6 @@ def check_users():
     )
 
 
-# Calls DB and if the last recorded ultrasound ping was more than 6h ago, calls the user
 
 if __name__ == "__main__":
     app.run()
