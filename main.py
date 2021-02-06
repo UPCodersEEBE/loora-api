@@ -9,9 +9,11 @@ from functions.twipy import send_whatsapp
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route("/about")
 def about():
-    return render_template('about.html')
+    return render_template("about.html")
+
 
 @app.route("/add_device", methods=["POST"])
 def add_device():
@@ -48,7 +50,7 @@ def check_users():
     for action in actions:
         users_to_call = get_last_action(action)
         call_users(users_to_call, action)
-    return
+    return "check completed"
 
 
 if __name__ == "__main__":
