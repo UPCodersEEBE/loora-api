@@ -13,6 +13,8 @@ def send_whatsapp(recievernum, name):
     print("called {} at {}".format(name, recievernum))
     message = f"Hey! It seems like {name} is moving around"
     message = client.messages.create(
-        from_="whatsapp:+14155238886", body=message, to="whatsapp:+34" + recievernum
+        from_="whatsapp:+14155238886",
+        body=message,
+        to="whatsapp:+34" + str(recievernum),
     )
     return
