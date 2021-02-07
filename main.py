@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, redirect, jsonify
 from flask_cors import CORS
 import json
 
@@ -15,10 +15,28 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/create_user_form")
-def create_user_form():
+@app.route("/sign-up", methods=["GET", "POST"])
+def sign_up():
+
+    if request.method == "POST":
+
+        name = request.form["name"]
+        deviceid = request.form["deviceid"]
+        phone = request.form["phone"]
+
+        add_device(name, deviceid, phone)
+        return redirect(request.url)
+
     return render_template("adduser.html")
 
+
+def add_device_form(name, dev_id, phone):
+    try:
+        data = {"name": name, "phone": phone}
+        add_device_db(data, dev_id)
+        return "User added"
+    except:
+        return "At least one parameter is missing"
 
 @app.route("/add_device", methods=["POST"])
 def add_device():
