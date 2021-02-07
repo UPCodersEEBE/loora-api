@@ -24,6 +24,6 @@ def send_message(recievernum, message):
     message = client.messages.create(
         from_="whatsapp:+14155238886",
         body=message,
-        to="whatsapp:+{}".format(recievernum),
+        to=f"whatsapp:+{recievernum}",
     )
     return
