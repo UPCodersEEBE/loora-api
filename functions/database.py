@@ -1,5 +1,5 @@
 from google.cloud import datastore
-from .time_functions import time_check, arduino_new_time
+from .time_functions import time_check, arduino_new_time, format_time
 from .twipy import send_whatsapp
 
 client = datastore.Client()
@@ -67,4 +67,4 @@ def retrieve_all_data(dev_id):
     data = client.get(key)
     name=data["name"]
     phone=data["phone"]
-    return last_ping, last_alive, name, phone
+    return format_time(last_ping),format_time(last_alive), name, phone

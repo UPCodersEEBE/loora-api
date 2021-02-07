@@ -10,22 +10,13 @@ import time
 # is 12 hours
 # if the action to check is "ping" the offset is set to 10 minutes
 def time_check(timeinput, action):
-    clock = timeinput[:-1].split("T")[1]
-    c = clock.split(":")
-
-    date = timeinput.split("T")[0]
-    d = date.split("-")
-
+    timein = format_time(timeinput)
     now = datetime.now()
-
-    timein = datetime(
-        int(d[0]), int(d[1]), int(d[2]), int(c[0]), int(c[1]), int(c[2][:2])
-    )
 
     if action == "alive":
         compare = timein + timedelta(hours=1)
-            if  datetime.now().hour > 21 and datetime.now().hour < 10:
-                return False
+        if datetime.now().hour > 21 and datetime.now().hour < 10:
+            return False
 
     elif action == "ping":
         compare = timein + timedelta(minutes=10)
@@ -35,6 +26,16 @@ def time_check(timeinput, action):
     else:
         return False
 
+def format_time(timeinput):
+    clock = timeinput[:-1].split("T")[1]
+    c = clock.split(":")
+
+    date = timeinput.split("T")[0]
+    d = date.split("-")
+
+    return datetime(
+        int(d[0]), int(d[1]), int(d[2]), int(c[0]), int(c[1]), int(c[2][:2])
+    )
 
 def arduino_new_time(action):
     now = datetime.now()
