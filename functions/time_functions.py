@@ -14,7 +14,7 @@ def time_check(timeinput, action):
     now = datetime.now()
 
     if action == "alive":
-        compare = timein + timedelta(hours=1)
+        compare = timein + timedelta(hours=4)
         if datetime.now().hour > 21 and datetime.now().hour < 10:
             return False
 
@@ -40,7 +40,7 @@ def format_time(timeinput):
 def arduino_new_time(action):
     now = datetime.now()
     if action == "alive":
-        now -= timedelta(hours=11)
+        now -= timedelta(hours=3)
     elif action == "ping":
         now += timedelta(hours=2)
     return str(now).replace(" ","T")+"Z"
