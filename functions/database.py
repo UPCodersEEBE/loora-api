@@ -6,7 +6,7 @@ client = datastore.Client()
 
 # adds a device, userId and telephone to users DB
 def add_device_db(device, dev_id):
-    entity = datastore.Entity(key=client.key("users", device))
+    entity = datastore.Entity(key=client.key("users", dev_id))
     entity.update(device)
     client.put(entity)
     return
