@@ -13,7 +13,7 @@ def send_whatsapp(recievernum, name, action):
     if action == "ping":
         message = f"It seems like {name}'s node disconnected! It may be out of battery."
     elif action == "alive":
-        message = f"Hey! It seems like {name} is moving around"
+        message = f"Hey! It seems like {name} hasn't moved in a while. You should check on them."
     print("called {} at {} saying: {}".format(name, recievernum, message))
     send_message(recievernum, message)
     return
