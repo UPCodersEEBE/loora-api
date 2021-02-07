@@ -19,6 +19,7 @@ def add_device():
     json_data = request.get_json(force=True)
     try:
         name = json_data["name"]
+        dev_id = json_data["dev_id"]
         phone = json_data["phone"]
         data = {"name": name, "phone": phone}
         add_device_db(data, dev_id)
