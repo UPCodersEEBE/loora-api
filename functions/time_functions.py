@@ -32,3 +32,12 @@ def time_check(timeinput, action):
         return True
     else:
         return False
+
+
+def arduino_new_time(action):
+    now = datetime.now()
+    if action == "alive":
+        now -= timedelta(hours=11)
+    elif action == "ping":
+        now += timedelta(hours=2)
+    return str(now).replace(" ","T")+"Z"

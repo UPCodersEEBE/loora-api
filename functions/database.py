@@ -1,5 +1,5 @@
 from google.cloud import datastore
-from .time_functions import time_check
+from .time_functions import time_check, arduino_new_time
 from .twipy import send_whatsapp
 
 client = datastore.Client()
@@ -44,4 +44,13 @@ def call_users(users_to_call, action):
     for user in list(query.fetch()):
         if (user.key.id_or_name) in users_to_call:
             send_whatsapp(user["phone"], user["name"], action)
+            update_after_call(user.key.id_or_name,action)
+    return
+
+# modifies database to prevent sending messages every user check, which
+# happens once every 5 minutes
+def update_after_call(userId,action):
+    entity = datastore.Entity(key=client.key(action, userId))
+    entity.update({"time":str(arduino_new_time(action)) })
+    client.put(entity)
     return
