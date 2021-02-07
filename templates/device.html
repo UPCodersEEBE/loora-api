@@ -4,14 +4,22 @@
     <h4 class="card-title">Your data</h4>
     <hr />
     <div class="form-group">
-      <label>Name:</label>
-      <div class="form-control">{{ name }}</div>
-      <label>Phone:</label>
-      <div class="form-control">{{ phone }}</div>
-      <label>Last user activity:</label>
-      <div class="form-control">{{ last_alive }}</div>
-      <label>Last device activity:</label>
-      <div class="form-control">{{ last_ping }}</div>
+      <div class="form-group">
+        <label>Name:</label>
+        <div class="form-control">{{ name }}</div>
+      </div>
+      <div class="form-group">
+        <label>Phone:</label>
+        <div class="form-control">{{ phone }}</div>
+      </div>
+      <div class="form-group">
+        <label>Last user activity:</label>
+        <div class="form-control">{{ last_alive }}</div>
+      </div>
+      <div class="form-group">
+        <label>Last device activity:</label>
+        <div class="form-control">{{ last_ping }}</div>
+      </div>
     </div>
   </div>
   {% endblock %}
