@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/about")
+@app.route("/")
 def about():
     return render_template("about.html")
 

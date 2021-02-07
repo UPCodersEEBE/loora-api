@@ -38,5 +38,5 @@ def call_users(users_to_call, action):
     query = client.query(kind="users")
     for user in list(query.fetch()):
         if (user.key.id_or_name) in users_to_call:
-            send_whatsapp(user["phone"], user["name"])
+            send_whatsapp(user["phone"], user["name"], action)
     return
