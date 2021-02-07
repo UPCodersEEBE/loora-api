@@ -23,7 +23,9 @@ def time_check(timeinput, action):
     )
 
     if action == "alive":
-        compare = timein + timedelta(hours=12)
+        compare = timein + timedelta(hours=1)
+            if  datetime.now().hour > 21 and datetime.now().hour < 10:
+                return False
 
     elif action == "ping":
         compare = timein + timedelta(minutes=10)
