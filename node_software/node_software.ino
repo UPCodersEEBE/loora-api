@@ -29,10 +29,6 @@ static uint8_t mydata[] = "x";
 static uint8_t mydata2[] = "o";
 static osjob_t sendjob;
 
-// Schedule TX every this many seconds (might become longer due to duty
-// cycle limitations).
-const unsigned TX_INTERVAL = 5;
-
 // Pin mapping
 // Adapted for Feather M0 per p.10 of [feather]
 const lmic_pinmap lmic_pins = {
@@ -264,7 +260,7 @@ void loop() {
         do_send(&sendjob);
     }
 
-    if (count < 6000) {
+    if (count < 1100) {
       count += 1;
       } else {
       count = 0;
