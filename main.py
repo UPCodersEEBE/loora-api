@@ -5,6 +5,7 @@ import json
 # custom functions
 from functions.database import (
     store_db,
+    retrieve_all_data,
     get_last_action,
     call_users,
     add_device_db,
@@ -19,6 +20,13 @@ CORS(app)
 @app.route("/")
 def about():
     return render_template("about.html")
+
+# OCheck information from specific device
+@app.route("/device", methods=["GET"])
+def device():
+    dev_id=request.args.get("dev_id")
+    last_ping, last_alive, name, phone = retrieve_all_data(dev_id)
+    return render_template("device.html", last_ping=last_ping, last_alive=last_alive, name=name, phone=phone)
 
 
 # html page to add a user to the database. The user needs 3 parameters:

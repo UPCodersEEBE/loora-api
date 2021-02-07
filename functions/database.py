@@ -54,3 +54,17 @@ def update_after_call(userId,action):
     entity.update({"time":str(arduino_new_time(action)) })
     client.put(entity)
     return
+
+
+def retrieve_all_data(dev_id):
+    key = client.key("ping", dev_id)
+    data = client.get(key)
+    last_ping=data["time"]
+    key = client.key("alive", dev_id)
+    data = client.get(key)
+    last_alive=data["time"]
+    key = client.key("users", dev_id)
+    data = client.get(key)
+    name=data["name"]
+    phone=data["phone"]
+    return last_ping, last_alive, name, phone
