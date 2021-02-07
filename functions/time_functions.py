@@ -23,7 +23,7 @@ def time_check(timeinput, action):
     )
 
     if action == "alive":
-        compare = timein + timedelta(hours=4)
+        compare = timein + timedelta(hours=1)
             if  datetime.now().hour > 21 and datetime.now().hour < 10:
                 return False
 
