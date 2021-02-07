@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+
+from flask import Flask, request, render_template, redirect
 from flask_cors import CORS
 import json
 
@@ -22,8 +23,18 @@ def about():
 
 
 # website to add a user to the database
-@app.route("/create_user_form")
-def create_user_form():
+@app.route("/sign-up", methods=["GET", "POST"])
+def sign_up():
+
+    if request.method == "POST":
+
+        name = request.form["name"]
+        deviceid = request.form["deviceid"]
+        phone = request.form["phone"]
+
+        add_device(name, deviceid, phone)
+        return redirect(request.url)
+
     return render_template("adduser.html")
 
 
