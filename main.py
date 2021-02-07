@@ -1,4 +1,3 @@
-
 from flask import Flask, request, render_template, redirect
 from flask_cors import CORS
 import json
@@ -22,7 +21,9 @@ def about():
     return render_template("about.html")
 
 
-# website to add a user to the database
+# html page to add a user to the database. The user needs 3 parameters:
+# devie id, name and phone number. It is added to an entity called
+# users in google datastore
 @app.route("/sign-up", methods=["GET", "POST"])
 def sign_up():
 
@@ -38,16 +39,8 @@ def sign_up():
     return render_template("adduser.html")
 
 
-# endpoint to add a user to the database. The user needs 3 parameters:
-# devie id, name and phone number. It is added to an entity called
-# users in google datastore
-@app.route("/add_device", methods=["POST"])
-def add_device():
-    json_data = request.get_json(force=True)
+def add_device(name, dev_id, phone):
     try:
-        name = json_data["name"]
-        dev_id = json_data["dev_id"]
-        phone = json_data["phone"]
         data = {"name": name, "phone": phone}
         add_device_db(data, dev_id)
         return "User added"
